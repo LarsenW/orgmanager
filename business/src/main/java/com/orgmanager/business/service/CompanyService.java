@@ -1,8 +1,8 @@
-package com.orgmanager.service;
+package com.orgmanager.business.service;
 
 import java.util.List;
 
-import com.orgmanager.entity.Company;
+import com.orgmanager.common.entity.Company;
 
 public interface CompanyService {
 	public void persist(Company company);

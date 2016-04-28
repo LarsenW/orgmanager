@@ -1,4 +1,4 @@
-package com.orgmanager.entity;
+package com.orgmanager.common.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

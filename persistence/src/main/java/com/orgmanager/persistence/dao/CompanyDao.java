@@ -1,8 +1,8 @@
-package com.orgmanager.dao;
+package com.orgmanager.persistence.dao;
 
 import java.util.List;
 
-import com.orgmanager.entity.Company;
+import com.orgmanager.common.entity.Company;
 
 public interface CompanyDao {
 

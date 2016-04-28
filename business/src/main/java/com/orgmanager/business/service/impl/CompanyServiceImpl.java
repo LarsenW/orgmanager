@@ -1,4 +1,4 @@
-package com.orgmanager.service.impl;
+package com.orgmanager.business.service.impl;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.orgmanager.dao.CompanyDao;
-import com.orgmanager.entity.Company;
-import com.orgmanager.service.CompanyService;
+import com.orgmanager.business.service.CompanyService;
+import com.orgmanager.common.entity.Company;
+import com.orgmanager.persistence.dao.CompanyDao;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)

@@ -1,4 +1,4 @@
-package com.orgmanager.dao.impl;
+package com.orgmanager.persistence.dao.impl;
 
 import java.util.List;
 
@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import com.orgmanager.dao.CompanyDao;
-import com.orgmanager.entity.Company;
+
+import com.orgmanager.common.entity.Company;
+import com.orgmanager.persistence.dao.CompanyDao;
 
 @Repository
 public class CompanyDaoImpl implements CompanyDao {
