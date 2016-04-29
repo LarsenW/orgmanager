@@ -36,16 +36,14 @@
 						<label for="income">Earnings:</label> <input type="text"
 							class="form-control" id="income" ng-model="income">
 						<div>
-							<input type="checkbox" ng-model="isSubsidiary">
-							Subsidiary company
+							<input type="checkbox" ng-model="isSubsidiary"
+								ng-click="getCompanies()"> Subsidiary company
 						</div>
 						<div ng-show="isSubsidiary">
-							<label for="sel1">Choose parent company:</label> <select
-								class="form-control" id="sel1">
-								<option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+							<label for="companiesList">Choose parent company:</label> <select
+								class="form-control" id="companiesList"
+								ng-model="parentCompanyName"
+								ng-options="x.name for x in companies">
 							</select>
 						</div>
 						<br>
@@ -64,12 +62,13 @@
 		var app = angular.module('createCompanyApp', []);
 		app.controller('createCompanyCtrl', function($scope, $http) {
 			$scope.getCompanies = function() {
-				$http.get("get_companies").then(function(response) {
-					var companies = response.data;
-					console.log(companies);
-				});
+				if ($scope.isSubsidiary) {
+					$http.get("get_companies").then(function(response) {
+						$scope.companies = response.data;
+						console.log($scope.companies);
+					});
+				}
 			}
-			$scope.getCompanies();
 			$scope.sendForm = function() {
 				var company = {
 					"name" : $scope.companyName,
