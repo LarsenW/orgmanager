@@ -37,14 +37,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<Company> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return companyDao.findAll();
 	}
 
 	@Override
 	public Company getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return companyDao.getById(id);
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -36,14 +37,13 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public List<Company> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = entityManager.createQuery("Select t " + "from " + Company.class.getSimpleName() + " t ");
+		return query.getResultList();
 	}
 
 	@Override
 	public Company getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Company.class, id);
 	}
 
 }
