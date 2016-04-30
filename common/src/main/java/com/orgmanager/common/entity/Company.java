@@ -17,6 +17,8 @@ public class Company {
 
 	private Double income;
 
+	private Long parentId;
+
 	public Long getId() {
 		return id;
 	}
@@ -40,5 +42,13 @@ public class Company {
 	public void setIncome(Double income) {
 		this.income = income;
 	}
-	
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
 }

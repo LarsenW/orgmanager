@@ -42,7 +42,7 @@
 						<div ng-show="isSubsidiary">
 							<label for="companiesList">Choose parent company:</label> <select
 								class="form-control" id="companiesList"
-								ng-model="parentCompanyName"
+								ng-model="parentCompany"
 								ng-options="x.name for x in companies">
 							</select>
 						</div>
@@ -72,11 +72,13 @@
 			$scope.sendForm = function() {
 				var company = {
 					"name" : $scope.companyName,
-					"income" : $scope.income
+					"income" : $scope.income,
+					"parentId" : $scope.parentCompany.id
 				};
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
 				});
+				$scope.isSubsidiary=false;
 			}
 
 		});
