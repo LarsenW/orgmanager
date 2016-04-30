@@ -44,7 +44,7 @@
 					<tfoot>
 						<tr>
 							<th>Name</th>
-							<th>Earnings</th>				
+							<th>Earnings</th>
 						</tr>
 					</tfoot>
 					<tbody>
@@ -97,7 +97,7 @@
 				var company = {
 					"name" : $scope.companyName,
 					"income" : $scope.income,
-					"parentId" : $scope.parentCompany.id
+					"parentId" : $scope.parentCompany==undefined?0:$scope.parentCompany.parentId
 				};
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
