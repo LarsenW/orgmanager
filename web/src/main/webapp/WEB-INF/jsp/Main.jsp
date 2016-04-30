@@ -11,9 +11,14 @@
 <c:set var="basedir" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet"
 	href="${basedir}/resources/css/lib/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${basedir}/resources/css/lib/dataTables.bootstrap.min.css">
 <script src="${basedir}/resources/js/lib/angular.min.js"></script>
 <script src="${basedir}/resources/js/lib/jquery-1.12.3.min.js"></script>
+<script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="${basedir}/resources/js/lib/dataTables.bootstrap.min.js"></script>
 <script src="${basedir}/resources/js/lib/bootstrap.min.js"></script>
+<script src="${basedir}/resources/js/main.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,35 +32,54 @@
 					<li><a href="" onclick="return false;">Add new company</a></li>
 				</ul>
 			</div>
+			<div class="col-md-8">
+				<table id="allCompanies" class="table table-striped table-bordered"
+					cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Earnings</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>Name</th>
+							<th>Earnings</th>				
+						</tr>
+					</tfoot>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 			<div class="col-md-2"></div>
-			<div class="col-md-4">
-				<div ng-app="createCompanyApp" ng-controller="createCompanyCtrl">
-					<div class="form-group">
-						<label for="companyName">Company name:</label> <input type="text"
-							class="form-control" id="companyName" ng-model="companyName">
-						<label for="income">Earnings:</label> <input type="text"
-							class="form-control" id="income" ng-model="income">
-						<div>
-							<input type="checkbox" ng-model="isSubsidiary"
-								ng-click="getCompanies()"> Subsidiary company
-						</div>
-						<div ng-show="isSubsidiary">
-							<label for="companiesList">Choose parent company:</label> <select
-								class="form-control" id="companiesList"
-								ng-model="parentCompany"
-								ng-options="x.name for x in companies">
-							</select>
-						</div>
-						<br>
-						<div>
-							<button ng-click="sendForm()" class="btn btn-success">
-								Submit <span class="glyphicon glyphicon-floppy-disk"></span>
-							</button>
-						</div>
+
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-3">
+			<div ng-app="createCompanyApp" ng-controller="createCompanyCtrl">
+				<div class="form-group">
+					<label for="companyName">Company name:</label> <input type="text"
+						class="form-control" id="companyName" ng-model="companyName">
+					<label for="income">Earnings:</label> <input type="text"
+						class="form-control" id="income" ng-model="income">
+					<div>
+						<input type="checkbox" ng-model="isSubsidiary"
+							ng-click="getCompanies()"> Subsidiary company
+					</div>
+					<div ng-show="isSubsidiary">
+						<label for="companiesList">Choose parent company:</label> <select
+							class="form-control" id="companiesList" ng-model="parentCompany"
+							ng-options="x.name for x in companies">
+						</select>
+					</div>
+					<br>
+					<div>
+						<button ng-click="sendForm()" class="btn btn-success">
+							Submit <span class="glyphicon glyphicon-floppy-disk"></span>
+						</button>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-4"></div>
 		</div>
 	</div>
 	<script>
@@ -78,7 +102,7 @@
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
 				});
-				$scope.isSubsidiary=false;
+				$scope.isSubsidiary = false;
 			}
 
 		});

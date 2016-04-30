@@ -36,6 +36,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/get_companies", method = RequestMethod.GET)
 	public @ResponseBody List<Company> getCompanies() {
+		System.out.println("find all");
 		return companyService.findAll();
 	}
 }
