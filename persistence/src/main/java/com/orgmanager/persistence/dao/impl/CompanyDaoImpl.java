@@ -35,6 +35,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> findAll() {
 		Query query = entityManager.createQuery("Select c from Company c ");
