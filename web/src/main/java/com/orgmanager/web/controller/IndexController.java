@@ -1,6 +1,5 @@
 package com.orgmanager.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.orgmanager.business.service.CompanyGridService;
 import com.orgmanager.business.service.CompanyService;
+import com.orgmanager.common.dto.CompanyGridDto;
 import com.orgmanager.common.entity.Company;
 
 @Controller
@@ -22,6 +23,9 @@ public class IndexController {
 
 	@Autowired
 	CompanyService companyService;
+	
+	@Autowired
+	CompanyGridService companyGridService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showMainPage(ModelMap model, HttpServletRequest request) {
@@ -35,8 +39,7 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/get_companies", method = RequestMethod.GET)
-	public @ResponseBody List<Company> getCompanies() {
-		System.out.println("find all");
-		return companyService.findAll();
+	public @ResponseBody List<CompanyGridDto> getCompanies() {
+		return companyGridService.getAllCompanies();
 	}
 }

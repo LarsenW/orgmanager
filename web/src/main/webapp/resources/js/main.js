@@ -17,12 +17,10 @@ function drawTable() {
 									data : 'income'
 								},
 								{
-									data : null,
-									defaultContent : '555'
+									data : 'companyType'
 								},
 								{
-									data : null,
-									defaultContent : '555'
+									data : 'totalIncome'
 								},
 								{
 									orderable : false,
