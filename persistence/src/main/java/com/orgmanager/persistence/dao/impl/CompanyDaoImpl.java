@@ -46,4 +46,13 @@ public class CompanyDaoImpl implements CompanyDao {
 		return entityManager.find(Company.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Company> getAllByParentId(Long id) {
+		Query query = entityManager.createQuery("Select c from Company c where c.parentId= :id");
+		query.setParameter("id", id);
+		List rl = query.getResultList();
+		return rl;
+	}
+
 }

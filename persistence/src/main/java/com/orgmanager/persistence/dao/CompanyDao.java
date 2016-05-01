@@ -15,4 +15,6 @@ public interface CompanyDao {
 	public List<Company> findAll();
 
 	public Company getById(Long id);
+
+	public List<Company> getAllByParentId(Long Id);
 }
