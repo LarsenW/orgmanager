@@ -25,13 +25,7 @@
 	<div class="container">
 		<br>
 		<div class="row">
-			<div class="col-md-2">
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active "><a href="" onclick="return false;">All
-							companies</a></li>
-					<li><a href="" onclick="return false;">Add new company</a></li>
-				</ul>
-			</div>
+			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<table id="allCompanies" class="table table-striped table-bordered"
 					cellspacing="0" width="100%">
@@ -110,11 +104,14 @@
 					"parentId" : $scope.parentCompany == undefined ? 0
 							: $scope.parentCompany.id
 				};
-				
+
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
 				});
 				$scope.isSubsidiary = false;
+				$scope.companyName='';
+				$scope.income='';
+				$scope.parentCompany = undefined;
 			}
 
 		});
