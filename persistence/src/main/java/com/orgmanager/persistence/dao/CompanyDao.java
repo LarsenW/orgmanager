@@ -17,4 +17,6 @@ public interface CompanyDao {
 	public Company getById(Long id);
 
 	public List<Company> getAllByParentId(Long Id);
+
+	public void resetAllParentIdChains(Long id);
 }

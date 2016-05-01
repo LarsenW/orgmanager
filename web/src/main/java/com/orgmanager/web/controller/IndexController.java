@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.orgmanager.business.service.CompanyDeletingService;
 import com.orgmanager.business.service.CompanyGridService;
 import com.orgmanager.business.service.CompanyService;
 import com.orgmanager.common.dto.CompanyGridDto;
@@ -23,9 +25,12 @@ public class IndexController {
 
 	@Autowired
 	CompanyService companyService;
-	
+
 	@Autowired
 	CompanyGridService companyGridService;
+
+	@Autowired
+	CompanyDeletingService companyDeletingService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView showMainPage(ModelMap model, HttpServletRequest request) {
@@ -40,5 +45,10 @@ public class IndexController {
 	@RequestMapping(value = "/get_companies", method = RequestMethod.GET)
 	public @ResponseBody List<CompanyGridDto> getCompanies() {
 		return companyGridService.getAllCompanies();
+	}
+
+	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
+	public @ResponseBody void deleteCompany(@PathVariable Long id) {
+		companyDeletingService.deleteCompanyById(id);
 	}
 }

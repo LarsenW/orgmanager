@@ -61,7 +61,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-3">
 			<div ng-app="createCompanyApp" ng-controller="createCompanyCtrl">
-				<div class="form-group">	
+				<div class="form-group">
 					<form name="companyForm" ng-submit="sendForm()">
 						<label for="companyName">Company name:</label> <input type="text"
 							class="form-control" id="companyName" name="companyName"
@@ -116,7 +116,6 @@
 				$scope.income = '';
 				$scope.parentCompany = undefined;
 			}
-
 		});
 	</script>
 </body>
