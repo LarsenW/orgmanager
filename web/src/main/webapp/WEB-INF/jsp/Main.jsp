@@ -73,7 +73,7 @@
 					<div ng-show="isSubsidiary">
 						<label for="companiesList">Choose parent company:</label> <select
 							class="form-control" id="companiesList" ng-model="parentCompany"
-							ng-options="x.name for x in companies">
+							ng-options="x.name for x in companies| orderBy:'name'">
 						</select>
 					</div>
 					<br>
@@ -109,8 +109,8 @@
 					console.log(response.status);
 				});
 				$scope.isSubsidiary = false;
-				$scope.companyName='';
-				$scope.income='';
+				$scope.companyName = '';
+				$scope.income = '';
 				$scope.parentCompany = undefined;
 			}
 

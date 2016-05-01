@@ -34,7 +34,6 @@ public class IndexController {
 
 	@RequestMapping(value = "/save_company", method = RequestMethod.POST)
 	public @ResponseBody void saveCompany(@RequestBody Company company) {
-		System.out.println(company.getParentId());
 		companyService.persist(company);
 	}
 
