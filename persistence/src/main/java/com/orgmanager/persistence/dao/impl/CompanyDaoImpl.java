@@ -37,7 +37,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public List<Company> findAll() {
-		Query query = entityManager.createQuery("Select t " + "from " + Company.class.getSimpleName() + " t ");
+		Query query = entityManager.createQuery("Select c from Company c ");
 		return query.getResultList();
 	}
 
@@ -51,8 +51,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	public List<Company> getAllByParentId(Long id) {
 		Query query = entityManager.createQuery("Select c from Company c where c.parentId= :id");
 		query.setParameter("id", id);
-		List rl = query.getResultList();
-		return rl;
+		return query.getResultList();
 	}
 
 }
