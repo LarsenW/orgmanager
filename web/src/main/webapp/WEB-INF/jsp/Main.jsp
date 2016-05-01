@@ -108,7 +108,7 @@
 					"name" : $scope.companyName,
 					"income" : $scope.income,
 					"parentId" : $scope.parentCompany == undefined ? 0
-							: $scope.parentCompany.parentId
+							: $scope.parentCompany.id
 				};
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
