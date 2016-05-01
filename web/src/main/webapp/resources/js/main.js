@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	drawTable();
 });
+var table;
 function drawTable() {
 	table = $('#allCompanies')
 			.DataTable(
@@ -43,4 +44,7 @@ function drawTable() {
 					}
 
 			)
+}
+function destroyTable(){
+	table.destroy();
 }

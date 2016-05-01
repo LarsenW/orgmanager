@@ -61,27 +61,30 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-3">
 			<div ng-app="createCompanyApp" ng-controller="createCompanyCtrl">
-				<div class="form-group">
-					<label for="companyName">Company name:</label> <input type="text"
-						class="form-control" id="companyName" ng-model="companyName">
-					<label for="income">Earnings:</label> <input type="text"
-						class="form-control" id="income" ng-model="income">
-					<div>
-						<input type="checkbox" ng-model="isSubsidiary"
-							ng-click="getCompanies()"> Subsidiary company
-					</div>
-					<div ng-show="isSubsidiary">
-						<label for="companiesList">Choose parent company:</label> <select
-							class="form-control" id="companiesList" ng-model="parentCompany"
-							ng-options="x.name for x in companies| orderBy:'name'">
-						</select>
-					</div>
-					<br>
-					<div>
-						<button ng-click="sendForm()" class="btn btn-success">
-							Submit <span class="glyphicon glyphicon-floppy-disk"></span>
-						</button>
-					</div>
+				<div class="form-group">	
+					<form name="companyForm" ng-submit="sendForm()">
+						<label for="companyName">Company name:</label> <input type="text"
+							class="form-control" id="companyName" name="companyName"
+							ng-model="companyName" required> <label for="income">Earnings:</label>
+						<input type="text" class="form-control" id="income"
+							ng-model="income" required>
+						<div>
+							<input type="checkbox" ng-model="isSubsidiary"
+								ng-click="getCompanies()"> Subsidiary company
+						</div>
+						<div ng-show="isSubsidiary">
+							<label for="companiesList">Choose parent company:</label> <select
+								class="form-control" id="companiesList" ng-model="parentCompany"
+								ng-options="x.name for x in companies| orderBy:'name'">
+							</select>
+						</div>
+						<br>
+						<div>
+							<button type="submit" class="btn btn-success">
+								Submit <span class="glyphicon glyphicon-floppy-disk"></span>
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
