@@ -22,7 +22,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container" ng-app="createCompanyApp"
+		ng-controller="createCompanyCtrl">
 		<br>
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -56,12 +57,20 @@
 				</table>
 			</div>
 			<div class="col-md-2"></div>
-
 		</div>
+		<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-3">
-			<div ng-app="createCompanyApp" ng-controller="createCompanyCtrl">
-				<div class="form-group">
+			<div class="col-md-4">
+				<button type="button" class="btn btn-primary" ng-click=showForm()>
+					Add company <span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<br> <br>
+				<div class="form-group" ng-show="formVisible">
 					<form name="companyForm" ng-submit="sendForm()">
 						<label for="companyName">Company name:</label> <input type="text"
 							class="form-control" id="companyName" name="companyName"
@@ -92,6 +101,10 @@
 	<script>
 		var app = angular.module('createCompanyApp', []);
 		app.controller('createCompanyCtrl', function($scope, $http) {
+			$scope.formVisible = false;
+			$scope.showForm = function() {
+				$scope.formVisible = true;
+			}
 			$scope.getCompanies = function() {
 				if ($scope.isSubsidiary) {
 					$http.get("get_companies").then(function(response) {
@@ -110,11 +123,13 @@
 
 				$http.post("save_company", company).then(function(response) {
 					console.log(response.status);
-				});
-				$scope.isSubsidiary = false;
-				$scope.companyName = '';
-				$scope.income = '';
-				$scope.parentCompany = undefined;
+					table.ajax.reload();
+					$scope.isSubsidiary = false;
+					$scope.companyName = '';
+					$scope.income = '';
+					$scope.parentCompany = undefined;
+					$scope.formVisible = false;	
+				});							
 			}
 		});
 	</script>

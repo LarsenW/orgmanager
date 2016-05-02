@@ -1,8 +1,5 @@
 $(document).ready(function() {
 	drawTable();
-	$("td").click(function() {
-		console.log('tree')
-	});
 });
 var table;
 function drawTable() {
