@@ -63,10 +63,6 @@ function drawTable() {
 								.ajax({
 									type : "POST",
 									url : "delete_" + data.id,
-									data : {
-										old_password : $("#old_password").val(),
-										new_password : $("#new_password").val()
-									},
 									success : function(data) {
 										table.ajax.reload();
 									},
