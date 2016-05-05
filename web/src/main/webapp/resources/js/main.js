@@ -76,7 +76,19 @@ $(document)
 														}
 														if (!fail) {
 															table.ajax.reload();
+															$(
+																	"input#companyName")
+																	.val('');
+															$("input#income")
+																	.val('');
 															hideForm();
+															$(
+																	'#isSubsidiaryCompany')
+																	.prop(
+																			'checked',
+																			false);
+															$("select#companiesList").prop('selectedIndex',0);
+															$("#companiesSelect").hide();
 															$("#successWell")
 																	.show()
 																	.delay(3000)
