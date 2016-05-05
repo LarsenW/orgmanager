@@ -31,7 +31,7 @@ $(document).ready(
 							"income" : $("input#income").val(),
 							"parentId" : $(
 									"select#companiesList option:selected")
-									.val() == undefined ? 0 : $(
+									.val() == '' ? 0 : $(
 									"select#companiesList option:selected")
 									.val()
 						};
