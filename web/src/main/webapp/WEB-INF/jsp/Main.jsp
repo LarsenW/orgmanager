@@ -24,6 +24,10 @@
 </head>
 <body>
 	<div class="container">
+		<div class="jumbotron">
+			<h1 style="color: white;">Welcome to ORGMANAGER</h1>
+			<p class="jumbotron-text">Service for managing companies</p>
+		</div>
 		<br>
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -56,7 +60,7 @@
 					</tbody>
 				</table>
 				<br>
-				<div class="well well-sm" id="successWell" style="display: none;">The
+				<div class="well well-sm success" id="successWell" style="display: none;">The
 					company has been successfully added</div>
 			</div>
 			<div class="col-md-2"></div>
@@ -79,12 +83,14 @@
 					<form name="companyForm" class="cmxform" id="companyForm"
 						style="display: none;">
 						<label for="companyName">Company name:</label> <input type="text"
-							class="form-control" id="companyName" name="companyName" minlength="2" required="" aria-required="true">
+							class="form-control" id="companyName" name="companyName"
+							minlength="2" required="" aria-required="true">
 						<div class="well well-sm" id="nameError" style="display: none;">Invalid
 							name</div>
 						<label for="income">Earnings:</label> <input type="number"
-							class="form-control" id="income" minlength="1" required="" aria-required="true">
-						<div class="well well-sm" id="incomeError" style="display: none;">Invalid
+							class="form-control" id="income" minlength="1" required=""
+							aria-required="true">
+						<div class="well well-sm error" id="incomeError" style="display: none;">Invalid
 							income</div>
 						<div>
 							<input type="checkbox" id="isSubsidiaryCompany">
@@ -109,5 +115,16 @@
 			</div>
 		</div>
 	</div>
+	<footer class="footer">
+	<div class="container">
+		<div class="col-md-2"></div>
+		<div class="col-md-6">
+			<p class="text-muted">Email: kucheryavenko.dmtr@gmail.com</p>
+		</div>
+		<div class="col-md-4">
+			<p class="text-muted">Skype: kucheryavenko.dmytro</p>
+		</div>
+	</div>
+	</footer>
 </body>
 </html>

@@ -1,3 +1,22 @@
 #successWell {
-    text-align: center;
+	text-align: center;
+}
+
+.jumbotron {
+	background-image: url(../images/jumbotronbackground.jpg);
+}
+
+.jumbotron-text {
+	color: white;
+}
+
+footer {
+	background-color: black;
+}
+
+.well.error {
+	background: rgb(255, 204, 204);
+}
+.well.success {
+	background: rgb(179, 255, 224);
 }

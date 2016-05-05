@@ -75,6 +75,7 @@ $(document)
 																	.hide();
 														}
 														if (!fail) {
+															table.ajax.reload();
 															hideForm();
 															$("#successWell")
 																	.show()
