@@ -41,7 +41,7 @@ public class IndexController {
 		Company company = new Company();
 		company.setName(request.getParameter("name"));
 		company.setIncome(Double.valueOf(request.getParameter("income")));
-		company.setParentId(Long.parseLong(request.getParameter("parentId")));
+		company.setParentId(Long.valueOf(request.getParameter("parentId")));
 		companyService.persist(company);
 	}
 

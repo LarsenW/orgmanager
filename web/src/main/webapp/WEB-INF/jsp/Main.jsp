@@ -79,7 +79,7 @@
 						<label for="companyName">Company name:</label> <input type="text"
 							minlength="2" required="" aria-required="true"
 							class="form-control" id="companyName" name="companyName">
-						<label for="income">Earnings:</label> <input type="text" minlength="1" required="" aria-required="true"
+						<label for="income">Earnings:</label> <input type="number" minlength="1" required="" aria-required="true"
 							class="form-control" id="income">
 						<div>
 							<input type="checkbox" id="isSubsidiaryCompany">
