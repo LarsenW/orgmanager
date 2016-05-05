@@ -1,55 +1,62 @@
-$(document).ready(
-		function() {
-			drawTable();
-			$("#addCompany").click(function() {
-				drawForm();
-			});
-			$("#isSubsidiaryCompany").change(function() {
-				if ($("#isSubsidiaryCompany").is(":checked")) {
-					$.ajax({
-						type : "GET",
-						url : "get_companies",
-						success : function(data) {
-							$.each(data, function(i, data) {
-								$('#companiesList').append($('<option>', {
-									value : data.id,
-									text : data.name
-								}));
-							});
-						}
-					})
-					$("#companiesSelect").show();
-				} else {
-					$("#companiesSelect").hide();
-				}
-			});
-
-			$("#submitButton").click(
-					function(event) {
-						var company = {
-							"name" : $("input#companyName").val(),
-							"income" : $("input#income").val(),
-							"parentId" : $(
-									"select#companiesList option:selected")
-									.val() == '' ? 0 : $(
-									"select#companiesList option:selected")
-									.val()
-						};
-						console.log(company);
-						$.ajax({
-							type : "POST",
-							url : "save_company",
-							data : company,
-							success : function() {
-								console.log('success');
-								hideForm();
-								$("#successWell").show().delay(5000).fadeOut();
-							}
-						})
-						return false;
+$(document)
+		.ready(
+				function() {
+					drawTable();
+					$("#addCompany").click(function() {
+						drawForm();
 					});
-
-		});
+					$("#isSubsidiaryCompany").change(
+							function() {
+								if ($("#isSubsidiaryCompany").is(":checked")) {
+									$.ajax({
+										type : "GET",
+										url : "get_companies",
+										success : function(data) {
+											$.each(data, function(i, data) {
+												$('#companiesList').append(
+														$('<option>', {
+															value : data.id,
+															text : data.name
+														}));
+											});
+										}
+									})
+									$("#companiesSelect").show();
+								} else {
+									$("#companiesSelect").hide();
+								}
+							});
+					$('#companyForm')
+							.submit(
+									function(event) {
+										$
+												.ajax({
+													type : "POST",
+													url : "save_company",
+													data : {
+														name : $(
+																"input#companyName")
+																.val(),
+														income : $(
+																"input#income")
+																.val(),
+														parentId : $(
+																"select#companiesList option:selected")
+																.val() == '' ? 0
+																: $(
+																		"select#companiesList option:selected")
+																		.val()
+													},
+													success : function() {
+														console.log("success")
+													},
+													error : function() {
+														alert('The service is currently unavailable. Please try again later.');
+													}
+												});
+										return false;
+									});
+				});
 var table;
 function drawTable() {
 	table = $('#allCompanies')
@@ -126,6 +133,6 @@ function drawTable() {
 function drawForm() {
 	$("#companyForm").show();
 }
-function hideForm(){
+function hideForm() {
 	$("#companyForm").hide();
 }

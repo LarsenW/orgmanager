@@ -20,7 +20,7 @@
 <link rel="stylesheet"
 	href="${basedir}/resources/css/main.css">
 <script
-	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+	src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 <script src="${basedir}/resources/js/main.js"></script>
 <title>Insert title here</title>
 </head>
@@ -74,8 +74,8 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<br> <br>
-				<div class="form-group" id="companyForm" style="display: none;">
-<%-- 					<form name="companyForm" id="companyForm" style="display: none;"> --%>
+				<div class="form-group">
+					<form name="companyForm" id="companyForm" style="display: none;">
 						<label for="companyName">Company name:</label> <input type="text"
 							class="form-control" id="companyName" name="companyName">
 						<label for="income">Earnings:</label> <input type="text"
@@ -91,11 +91,11 @@
 						</div>
 						<br>
 						<div>
-							<button class="btn btn-success" id="submitButton">
+							<button type="submit" class="btn btn-success" id="submitButton">
 								Submit <span class="glyphicon glyphicon-floppy-disk"></span>
 							</button>
 						</div>
-<%-- 					</form> --%>
+					</form>
 				</div>
 			</div>
 		</div>
