@@ -61,6 +61,7 @@ $(document)
 														if (data.invalidIncome) {
 															$("#incomeError")
 																	.show();
+															fail = true;
 														} else {
 															$("#incomeError")
 																	.hide();
@@ -68,6 +69,7 @@ $(document)
 														if (data.invalidParentId) {
 															$("#parentIdError")
 																	.show();
+															fail = true;
 														} else {
 															$("#parentIdError")
 																	.hide();

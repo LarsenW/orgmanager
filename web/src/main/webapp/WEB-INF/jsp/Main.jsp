@@ -74,14 +74,16 @@
 			<div class="col-md-6">
 				<br> <br>
 				<div class="form-group">
+					<h2 id="createTitle" style="display: none;">Create company</h2>
+					<h2 id="editTitle" style="display: none;">Edit company</h2>
 					<form name="companyForm" class="cmxform" id="companyForm"
 						style="display: none;">
 						<label for="companyName">Company name:</label> <input type="text"
-							class="form-control" id="companyName" name="companyName">
+							class="form-control" id="companyName" name="companyName" minlength="2" required="" aria-required="true">
 						<div class="well well-sm" id="nameError" style="display: none;">Invalid
 							name</div>
 						<label for="income">Earnings:</label> <input type="number"
-							class="form-control" id="income">
+							class="form-control" id="income" minlength="1" required="" aria-required="true">
 						<div class="well well-sm" id="incomeError" style="display: none;">Invalid
 							income</div>
 						<div>
