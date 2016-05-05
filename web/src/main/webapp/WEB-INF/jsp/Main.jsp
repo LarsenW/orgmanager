@@ -17,6 +17,8 @@
 <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/resources/js/lib/dataTables.bootstrap.min.js"></script>
 <script src="${basedir}/resources/js/lib/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="${basedir}/resources/css/main.css">
 <script
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="${basedir}/resources/js/main.js"></script>
@@ -55,6 +57,8 @@
 					<tbody>
 					</tbody>
 				</table>
+				<br>
+				<div class="well well-sm" id="successWell" style="display: none;">The company has been successfully added</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

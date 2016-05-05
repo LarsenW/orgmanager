@@ -42,6 +42,8 @@ $(document).ready(
 							data : company,
 							success : function() {
 								console.log('success');
+								hideForm();
+								$("#successWell").show().delay(5000).fadeOut();
 							}
 						})
 						return false;
@@ -123,4 +125,7 @@ function drawTable() {
 }
 function drawForm() {
 	$("#companyForm").show();
+}
+function hideForm(){
+	$("#companyForm").hide();
 }
