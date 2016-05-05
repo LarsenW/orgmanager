@@ -77,10 +77,13 @@
 					<form name="companyForm" class="cmxform" id="companyForm"
 						style="display: none;">
 						<label for="companyName">Company name:</label> <input type="text"
-							minlength="2" required="" aria-required="true"
 							class="form-control" id="companyName" name="companyName">
-						<label for="income">Earnings:</label> <input type="number" minlength="1" required="" aria-required="true"
+						<div class="well well-sm" id="nameError" style="display: none;">Invalid
+							name</div>
+						<label for="income">Earnings:</label> <input type="number"
 							class="form-control" id="income">
+						<div class="well well-sm" id="incomeError" style="display: none;">Invalid
+							income</div>
 						<div>
 							<input type="checkbox" id="isSubsidiaryCompany">
 							Subsidiary company
@@ -91,6 +94,8 @@
 								<option class="selectOptions"></option>
 							</select>
 						</div>
+						<div class="well well-sm" id="parentIdError"
+							style="display: none;">Invalid parent company</div>
 						<br>
 						<div>
 							<button type="submit" class="btn btn-success" id="submitButton">

@@ -47,12 +47,41 @@ $(document)
 																		"select#companiesList option:selected")
 																		.val()
 													},
-													success : function() {
-														console.log("success")
-														hideForm();
-														$("#successWell").show().delay(3000).fadeOut();
+													success : function(data) {
+														console.log(data)
+														var fail = false;
+														if (data.invalidName) {
+															$("#nameError")
+																	.show();
+															fail = true;
+														} else {
+															$("#nameError")
+																	.hide();
+														}
+														if (data.invalidIncome) {
+															$("#incomeError")
+																	.show();
+														} else {
+															$("#incomeError")
+																	.hide();
+														}
+														if (data.invalidParentId) {
+															$("#parentIdError")
+																	.show();
+														} else {
+															$("#parentIdError")
+																	.hide();
+														}
+														if (!fail) {
+															hideForm();
+															$("#successWell")
+																	.show()
+																	.delay(3000)
+																	.fadeOut();
+														}
+
 													},
-													error : function() {
+													error : function(data) {
 														alert('The service is currently unavailable. Please try again later.');
 													}
 												});

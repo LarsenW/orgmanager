@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.orgmanager.business.service.CompanyDeletingService;
 import com.orgmanager.business.service.CompanyGridService;
 import com.orgmanager.business.service.CompanyService;
+import com.orgmanager.common.dto.CompanyErrorDto;
 import com.orgmanager.common.dto.CompanyGridDto;
 import com.orgmanager.common.entity.Company;
 
@@ -37,12 +38,49 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/save_company", method = RequestMethod.POST)
-	public @ResponseBody void saveCompany(HttpServletRequest request) {
+	public @ResponseBody CompanyErrorDto saveCompany(HttpServletRequest request) {
+		CompanyErrorDto error = new CompanyErrorDto();
 		Company company = new Company();
-		company.setName(request.getParameter("name"));
-		company.setIncome(Double.valueOf(request.getParameter("income")));
-		company.setParentId(Long.valueOf(request.getParameter("parentId")));
-		companyService.persist(company);
+		boolean fail = false;
+		String name = request.getParameter("name");
+		try {
+			Double income = Double.valueOf(request.getParameter("income"));
+			if (income >= 0) {
+				company.setIncome(income);
+			} else {
+				error.setInvalidIncome(true);
+				fail = true;
+			}
+		} catch (NumberFormatException e) {
+			error.setInvalidIncome(true);
+			fail = true;
+		}
+		try {
+			Long parentId = Long.valueOf(request.getParameter("parentId"));
+			if (parentId == 0 || companyService.getById(parentId) != null) {
+				company.setParentId(parentId);
+			} else {
+				error.setInvalidParentId(true);
+				fail = true;
+			}
+		} catch (NumberFormatException e) {
+			error.setInvalidParentId(true);
+			fail = true;
+		}
+		if (name.length() > 1) {
+			company.setName(name);
+		} else {
+			error.setInvalidName(true);
+			fail = true;
+		}
+
+		if (!fail)
+
+		{
+			companyService.persist(company);
+		}
+		return error;
+
 	}
 
 	@RequestMapping(value = "/get_companies", method = RequestMethod.GET)
