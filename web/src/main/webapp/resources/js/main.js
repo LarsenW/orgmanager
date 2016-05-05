@@ -87,8 +87,14 @@ $(document)
 																	.prop(
 																			'checked',
 																			false);
-															$("select#companiesList").prop('selectedIndex',0);
-															$("#companiesSelect").hide();
+															$(
+																	"select#companiesList")
+																	.prop(
+																			'selectedIndex',
+																			0);
+															$(
+																	"#companiesSelect")
+																	.hide();
 															$("#successWell")
 																	.show()
 																	.delay(3000)
@@ -151,10 +157,35 @@ function drawTable() {
 		var data = table.row($(this).parents('tr')).data();
 		console.log(data);
 	});
-	$('#allCompanies tbody').on('click', 'button#edit', function() {
-		var data = table.row($(this).parents('tr')).data();
-		console.log(data);
-	});
+	$('#allCompanies tbody')
+			.on(
+					'click',
+					'button#edit',
+					function() {
+
+						var data = table.row($(this).parents('tr')).data();
+						console.log(data);
+						$
+								.ajax({
+									type : "GET",
+									url : "get_company_" + data.id,
+									success : function(data) {
+										// table.ajax.reload();
+										console.log(data.name)
+										drawForm();
+										$('input#companyName').val(data.name);
+										$('input#income').val(data.income);
+										if (data.parentId != 0) {
+											$('#isSubsidiaryCompany').prop(
+													'checked', true);
+										}
+									},
+									error : function(data) {
+										alert('The service is currently unavailable. Please try again later.');
+									}
+								});
+
+					});
 	$('#allCompanies tbody')
 			.on(
 					'click',

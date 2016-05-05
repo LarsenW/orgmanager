@@ -88,6 +88,12 @@ public class IndexController {
 		return companyGridService.getAllCompanies();
 	}
 
+	@RequestMapping(value = "/get_company_{id}", method = RequestMethod.GET)
+	public @ResponseBody Company getCompany(@PathVariable Long id) {
+		Company company = companyService.getById(id);
+		return company;
+	}
+
 	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
 	public @ResponseBody void deleteCompany(@PathVariable Long id) {
 		companyDeletingService.deleteCompanyById(id);
