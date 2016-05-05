@@ -13,17 +13,17 @@
 	href="${basedir}/resources/css/lib/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${basedir}/resources/css/lib/dataTables.bootstrap.min.css">
-<script src="${basedir}/resources/js/lib/angular.min.js"></script>
 <script src="${basedir}/resources/js/lib/jquery-1.12.3.min.js"></script>
 <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/resources/js/lib/dataTables.bootstrap.min.js"></script>
 <script src="${basedir}/resources/js/lib/bootstrap.min.js"></script>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="${basedir}/resources/js/main.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container" ng-app="createCompanyApp"
-		ng-controller="createCompanyCtrl">
+	<div class="container">
 		<br>
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -59,9 +59,9 @@
 			<div class="col-md-2"></div>
 		</div>
 		<div class="row">
-		<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
 			<div class="col-md-4">
-				<button type="button" class="btn btn-primary" ng-click=showForm()>
+				<button type="button" class="btn btn-primary" id="addCompany">
 					Add company <span class="glyphicon glyphicon-plus"></span>
 				</button>
 			</div>
@@ -70,68 +70,31 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<br> <br>
-				<div class="form-group" ng-show="formVisible">
-					<form name="companyForm" ng-submit="sendForm()">
+				<div class="form-group" id="companyForm" style="display: none;">
+<%-- 					<form name="companyForm" id="companyForm" style="display: none;"> --%>
 						<label for="companyName">Company name:</label> <input type="text"
-							class="form-control" id="companyName" name="companyName"
-							ng-model="companyName" required> <label for="income">Earnings:</label>
-						<input type="text" class="form-control" id="income"
-							ng-model="income" required>
+							class="form-control" id="companyName" name="companyName">
+						<label for="income">Earnings:</label> <input type="text"
+							class="form-control" id="income">
 						<div>
-							<input type="checkbox" ng-model="isSubsidiary"
-								ng-click="getCompanies()"> Subsidiary company
+							<input type="checkbox" id="isSubsidiaryCompany"> Subsidiary company
 						</div>
-						<div ng-show="isSubsidiary">
+						<div id="companiesSelect" style="display: none;">
 							<label for="companiesList">Choose parent company:</label> <select
-								class="form-control" id="companiesList" ng-model="parentCompany"
-								ng-options="x.name for x in companies| orderBy:'name'">
+								class="form-control" id="companiesList">
+								<option class="selectOptions"></option>
 							</select>
 						</div>
 						<br>
 						<div>
-							<button type="submit" class="btn btn-success">
+							<button class="btn btn-success" id="submitButton">
 								Submit <span class="glyphicon glyphicon-floppy-disk"></span>
 							</button>
 						</div>
-					</form>
+<%-- 					</form> --%>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		var app = angular.module('createCompanyApp', []);
-		app.controller('createCompanyCtrl', function($scope, $http) {
-			$scope.formVisible = false;
-			$scope.showForm = function() {
-				$scope.formVisible = true;
-			}
-			$scope.getCompanies = function() {
-				if ($scope.isSubsidiary) {
-					$http.get("get_companies").then(function(response) {
-						$scope.companies = response.data;
-						console.log($scope.companies);
-					});
-				}
-			}
-			$scope.sendForm = function() {
-				var company = {
-					"name" : $scope.companyName,
-					"income" : $scope.income,
-					"parentId" : $scope.parentCompany == undefined ? 0
-							: $scope.parentCompany.id
-				};
-
-				$http.post("save_company", company).then(function(response) {
-					console.log(response.status);
-					table.ajax.reload();
-					$scope.isSubsidiary = false;
-					$scope.companyName = '';
-					$scope.income = '';
-					$scope.parentCompany = undefined;
-					$scope.formVisible = false;	
-				});							
-			}
-		});
-	</script>
 </body>
 </html>

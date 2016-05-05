@@ -1,6 +1,53 @@
-$(document).ready(function() {
-	drawTable();
-});
+$(document).ready(
+		function() {
+			drawTable();
+			$("#addCompany").click(function() {
+				drawForm();
+			});
+			$("#isSubsidiaryCompany").change(function() {
+				if ($("#isSubsidiaryCompany").is(":checked")) {
+					$.ajax({
+						type : "GET",
+						url : "get_companies",
+						success : function(data) {
+							$.each(data, function(i, data) {
+								$('#companiesList').append($('<option>', {
+									value : data.id,
+									text : data.name
+								}));
+							});
+						}
+					})
+					$("#companiesSelect").show();
+				} else {
+					$("#companiesSelect").hide();
+				}
+			});
+
+			$("#submitButton").click(
+					function(event) {
+						var company = {
+							"name" : $("input#companyName").val(),
+							"income" : $("input#income").val(),
+							"parentId" : $(
+									"select#companiesList option:selected")
+									.val() == undefined ? 0 : $(
+									"select#companiesList option:selected")
+									.val()
+						};
+						console.log(company);
+						$.ajax({
+							type : "POST",
+							url : "save_company",
+							data : company,
+							success : function() {
+								console.log('success');
+							}
+						})
+						return false;
+					});
+
+		});
 var table;
 function drawTable() {
 	table = $('#allCompanies')
@@ -73,4 +120,7 @@ function drawTable() {
 						return false;
 					});
 
+}
+function drawForm() {
+	$("#companyForm").show();
 }

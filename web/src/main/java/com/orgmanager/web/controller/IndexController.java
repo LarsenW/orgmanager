@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,7 +37,11 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/save_company", method = RequestMethod.POST)
-	public @ResponseBody void saveCompany(@RequestBody Company company) {
+	public @ResponseBody void saveCompany(HttpServletRequest request) {
+		Company company = new Company();
+		company.setName(request.getParameter("name"));
+		company.setIncome(Double.valueOf(request.getParameter("income")));
+		company.setParentId(Long.parseLong(request.getParameter("parentId")));
 		companyService.persist(company);
 	}
 
