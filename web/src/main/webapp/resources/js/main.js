@@ -49,6 +49,8 @@ $(document)
 													},
 													success : function() {
 														console.log("success")
+														hideForm();
+														$("#successWell").show().delay(3000).fadeOut();
 													},
 													error : function() {
 														alert('The service is currently unavailable. Please try again later.');
