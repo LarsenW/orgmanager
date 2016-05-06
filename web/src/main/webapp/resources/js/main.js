@@ -1,98 +1,28 @@
-$(document)
-		.ready(
-				function() {
-					drawTable();
-					$("#addCompany").click(function() {
-						drawForm();
-					});
-					$("#isSubsidiaryCompany").change(
-							function() {
-								loadCompanies();
-							
-							});
-					$('#companyForm')
-							.submit(
-									function(event) {
-										$
-												.ajax({
-													type : "POST",
-													url : "save_company",
-													data : {
-														name : $(
-																"input#companyName")
-																.val(),
-														income : $(
-																"input#income")
-																.val(),
-														parentId : $(
-																"select#companiesList option:selected")
-																.val() == '' ? 0
-																: $(
-																		"select#companiesList option:selected")
-																		.val()
-													},
-													success : function(data) {
-														console.log(data)
-														var fail = false;
-														if (data.invalidName) {
-															$("#nameError")
-																	.show();
-															fail = true;
-														} else {
-															$("#nameError")
-																	.hide();
-														}
-														if (data.invalidIncome) {
-															$("#incomeError")
-																	.show();
-															fail = true;
-														} else {
-															$("#incomeError")
-																	.hide();
-														}
-														if (data.invalidParentId) {
-															$("#parentIdError")
-																	.show();
-															fail = true;
-														} else {
-															$("#parentIdError")
-																	.hide();
-														}
-														if (!fail) {
-															table.ajax.reload();
-															$(
-																	"input#companyName")
-																	.val('');
-															$("input#income")
-																	.val('');
-															hideForm();
-															$(
-																	'#isSubsidiaryCompany')
-																	.prop(
-																			'checked',
-																			false);
-															$(
-																	"select#companiesList")
-																	.prop(
-																			'selectedIndex',
-																			0);
-															$(
-																	"#companiesSelect")
-																	.hide();
-															$("#successWell")
-																	.show()
-																	.delay(3000)
-																	.fadeOut();
-														}
+var formState = {
+	create : 0,
+	update : 1
+}
+var currentState;
+var currentCompanyId=0;
+$(document).ready(function() {
+	drawTable();
+	$("#addCompany").click(function() {
+		currentState = formState.create;
+		drawForm();
+	});
+	$("#isSubsidiaryCompany").change(function() {
+		loadCompanies();
 
-													},
-													error : function(data) {
-														alert('The service is currently unavailable. Please try again later.');
-													}
-												});
-										return false;
-									});
-				});
+	});
+	$('#companyForm').submit(function(event) {
+		if (currentState == formState.create) {
+			createCompany();
+		} else if (currentState == formState.update) {
+			updateCompany();
+		}
+		return false;
+	});
+});
 var table;
 function drawTable() {
 	table = $('#allCompanies')
@@ -146,9 +76,10 @@ function drawTable() {
 					'click',
 					'button#edit',
 					function() {
-
+						currentState = formState.update;
 						var data = table.row($(this).parents('tr')).data();
 						console.log(data);
+						currentCompanyId=data.id;
 						$
 								.ajax({
 									type : "GET",
@@ -164,7 +95,7 @@ function drawTable() {
 													'checked', true);
 											$("#companiesSelect").show();
 											loadCompanies();
-											//$("#companiesList").val(1);
+											// $("#companiesList").val(1);
 										}
 									},
 									error : function(data) {
@@ -200,18 +131,17 @@ function drawForm() {
 function hideForm() {
 	$("#companyForm").hide();
 }
-function loadCompanies(){
+function loadCompanies() {
 	if ($("#isSubsidiaryCompany").is(":checked")) {
 		$.ajax({
 			type : "GET",
 			url : "get_companies",
 			success : function(data) {
 				$.each(data, function(i, data) {
-					$('#companiesList').append(
-							$('<option>', {
-								value : data.id,
-								text : data.name
-							}));
+					$('#companiesList').append($('<option>', {
+						value : data.id,
+						text : data.name
+					}));
 				});
 			}
 		})
@@ -219,4 +149,102 @@ function loadCompanies(){
 	} else {
 		$("#companiesSelect").hide();
 	}
+}
+function createCompany() {
+	$
+			.ajax({
+				type : "POST",
+				url : "save_company",
+				data : {
+					name : $("input#companyName").val(),
+					income : $("input#income").val(),
+					parentId : $("select#companiesList option:selected").val() == '' ? 0
+							: $("select#companiesList option:selected").val()
+				},
+				success : function(data) {
+					console.log(data)
+					var fail = false;
+					if (data.invalidName) {
+						$("#nameError").show();
+						fail = true;
+					} else {
+						$("#nameError").hide();
+					}
+					if (data.invalidIncome) {
+						$("#incomeError").show();
+						fail = true;
+					} else {
+						$("#incomeError").hide();
+					}
+					if (data.invalidParentId) {
+						$("#parentIdError").show();
+						fail = true;
+					} else {
+						$("#parentIdError").hide();
+					}
+					if (!fail) {
+						table.ajax.reload();
+						$("#successWell").show().delay(3000).fadeOut();
+						resetForm();
+					}
+
+				},
+				error : function(data) {
+					alert('The service is currently unavailable. Please try again later.');
+				}
+			});
+}
+function updateCompany() {
+	console.log('update');
+	$
+	.ajax({
+		type : "POST",
+		url : "update_company_"+currentCompanyId,
+		data : {
+			name : $("input#companyName").val(),
+			income : $("input#income").val(),
+			parentId : $("select#companiesList option:selected").val() == '' ? 0
+					: $("select#companiesList option:selected").val()
+		},
+		success : function(data) {
+			console.log(data)
+			var fail = false;
+			if (data.invalidName) {
+				$("#nameError").show();
+				fail = true;
+			} else {
+				$("#nameError").hide();
+			}
+			if (data.invalidIncome) {
+				$("#incomeError").show();
+				fail = true;
+			} else {
+				$("#incomeError").hide();
+			}
+			if (data.invalidParentId) {
+				$("#parentIdError").show();
+				fail = true;
+			} else {
+				$("#parentIdError").hide();
+			}
+			if (!fail) {
+				currentCompanyId=0;
+				table.ajax.reload();
+				$("#successWell").show().delay(3000).fadeOut();
+				resetForm();
+			}
+
+		},
+		error : function(data) {
+			alert('The service is currently unavailable. Please try again later.');
+		}
+	});
+}
+function resetForm() {
+	$("input#companyName").val('');
+	$("input#income").val('');
+	hideForm();
+	$('#isSubsidiaryCompany').prop('checked', false);
+	$("select#companiesList").prop('selectedIndex', 0);
+	$("#companiesSelect").hide();
 }

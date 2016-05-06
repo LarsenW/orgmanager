@@ -94,7 +94,54 @@ public class IndexController {
 		Company company = companyService.getById(id);
 		return company;
 	}
+	
+	@RequestMapping(value="/update_company_{id}",method=RequestMethod.POST)
+	public @ResponseBody CompanyErrorDto updateCompany(HttpServletRequest request,@PathVariable Long id){
+		CompanyErrorDto error = new CompanyErrorDto();
+		Company company = companyService.getById(id);
+		boolean fail = false;
+		String name = request.getParameter("name");
+		boolean unique = (companyService.getByName(name) == null)||name.equals(company.getName()) ? true : false;
+		try {
+			Double income = Double.valueOf(request.getParameter("income"));
+			if (income >= 0) {
+				company.setIncome(income);
+			} else {
+				error.setInvalidIncome(true);
+				fail = true;
+			}
+		} catch (NumberFormatException e) {
+			error.setInvalidIncome(true);
+			fail = true;
+		}
+		try {
+			Long parentId = Long.valueOf(request.getParameter("parentId"));
+			if (parentId == 0 || companyService.getById(parentId) != null) {
+				company.setParentId(parentId);
+			} else {
+				error.setInvalidParentId(true);
+				fail = true;
+			}
+		} catch (NumberFormatException e) {
+			error.setInvalidParentId(true);
+			fail = true;
+		}
+		if (name.length() > 1 && unique) {
+			company.setName(name);
+		} else {
+			error.setInvalidName(true);
+			fail = true;
+		}
 
+		if (!fail)
+
+		{
+			companyService.update(company);
+		}
+		return error;
+
+	}
+	
 	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
 	public @ResponseBody void deleteCompany(@PathVariable Long id) {
 		companyDeletingService.deleteCompanyById(id);
