@@ -75,7 +75,7 @@ function drawTable() {
 			)
 	$('#allCompanies tbody').on('click', 'button#tree', function() {
 		var data = table.row($(this).parents('tr')).data();
-		console.log(data);
+		alert('showing tree structure hasn`t implemented yet')
 	});
 	$('#allCompanies tbody')
 			.on(
