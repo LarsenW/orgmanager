@@ -104,6 +104,11 @@ function drawTable() {
 											loadCompanies();
 											$("#companiesSelect").show();
 
+										}else{
+											$('#isSubsidiaryCompany').prop(
+													'checked', false);
+											$("select#companiesList").prop('selectedIndex', 0);
+											$("#companiesSelect").hide();
 										}
 									},
 									error : function(data) {
