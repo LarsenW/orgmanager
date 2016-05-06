@@ -8,6 +8,7 @@ $(document).ready(function() {
 	drawTable();
 	$("#addCompany").click(function() {
 		currentState = formState.create;
+		$('h2#createTitle').show();
 		drawForm();
 	});
 	$("#isSubsidiaryCompany").change(function() {
@@ -87,6 +88,7 @@ function drawTable() {
 									success : function(data) {
 										// table.ajax.reload();
 										console.log(data.name)
+										$('h2#editTitle').show();
 										drawForm();
 										$('input#companyName').val(data.name);
 										$('input#income').val(data.income);
@@ -247,4 +249,6 @@ function resetForm() {
 	$('#isSubsidiaryCompany').prop('checked', false);
 	$("select#companiesList").prop('selectedIndex', 0);
 	$("#companiesSelect").hide();
+	$('h2#createTitle').hide();
+	$('h2#editTitle').hide();
 }
