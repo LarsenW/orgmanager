@@ -45,4 +45,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.getById(id);
 	}
 
+	@Override
+	public Company getByName(String name) {
+		return companyDao.getByName(name);
+	}
 }

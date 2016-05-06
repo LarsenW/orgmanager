@@ -7,24 +7,8 @@ $(document)
 					});
 					$("#isSubsidiaryCompany").change(
 							function() {
-								if ($("#isSubsidiaryCompany").is(":checked")) {
-									$.ajax({
-										type : "GET",
-										url : "get_companies",
-										success : function(data) {
-											$.each(data, function(i, data) {
-												$('#companiesList').append(
-														$('<option>', {
-															value : data.id,
-															text : data.name
-														}));
-											});
-										}
-									})
-									$("#companiesSelect").show();
-								} else {
-									$("#companiesSelect").hide();
-								}
+								loadCompanies();
+							
 							});
 					$('#companyForm')
 							.submit(
@@ -178,6 +162,9 @@ function drawTable() {
 										if (data.parentId != 0) {
 											$('#isSubsidiaryCompany').prop(
 													'checked', true);
+											$("#companiesSelect").show();
+											loadCompanies();
+											//$("#companiesList").val(1);
 										}
 									},
 									error : function(data) {
@@ -212,4 +199,24 @@ function drawForm() {
 }
 function hideForm() {
 	$("#companyForm").hide();
+}
+function loadCompanies(){
+	if ($("#isSubsidiaryCompany").is(":checked")) {
+		$.ajax({
+			type : "GET",
+			url : "get_companies",
+			success : function(data) {
+				$.each(data, function(i, data) {
+					$('#companiesList').append(
+							$('<option>', {
+								value : data.id,
+								text : data.name
+							}));
+				});
+			}
+		})
+		$("#companiesSelect").show();
+	} else {
+		$("#companiesSelect").hide();
+	}
 }

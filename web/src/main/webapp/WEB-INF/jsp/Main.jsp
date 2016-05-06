@@ -85,7 +85,7 @@
 						<label for="companyName">Company name:</label> <input type="text"
 							class="form-control" id="companyName" name="companyName"
 							minlength="2" required="" aria-required="true">
-						<div class="well well-sm" id="nameError" style="display: none;">Invalid
+						<div class="well well-sm" id="nameError" style="display: none;">Invalid or non-unique
 							name</div>
 						<label for="income">Earnings:</label> <input type="number"
 							class="form-control" id="income" minlength="1" required=""

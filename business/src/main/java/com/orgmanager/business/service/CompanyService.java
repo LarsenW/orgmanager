@@ -14,4 +14,6 @@ public interface CompanyService {
 	public List<Company> findAll();
 
 	public Company getById(Long id);
+	
+	public Company getByName(String name);
 }

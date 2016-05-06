@@ -57,9 +57,22 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public void resetAllParentIdChains(Long id) {
-		Query query =entityManager.createQuery("Update Company c set c.parentId=0 where c.parentId= :id ");
+		Query query = entityManager.createQuery("Update Company c set c.parentId=0 where c.parentId= :id ");
 		query.setParameter("id", id);
 		query.executeUpdate();
+	}
+
+	@Override
+	public Company getByName(String name) {
+		Query query = entityManager.createQuery("Select c from Company c where c.name= :name");
+		query.setParameter("name", name);
+		try {
+			Company company = (Company) query.getSingleResult();
+			return company;
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 
 }

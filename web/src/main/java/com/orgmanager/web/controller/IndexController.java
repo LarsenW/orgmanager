@@ -43,6 +43,7 @@ public class IndexController {
 		Company company = new Company();
 		boolean fail = false;
 		String name = request.getParameter("name");
+		boolean unique = companyService.getByName(name) == null ? true : false;
 		try {
 			Double income = Double.valueOf(request.getParameter("income"));
 			if (income >= 0) {
@@ -67,7 +68,7 @@ public class IndexController {
 			error.setInvalidParentId(true);
 			fail = true;
 		}
-		if (name.length() > 1) {
+		if (name.length() > 1 && unique) {
 			company.setName(name);
 		} else {
 			error.setInvalidName(true);
