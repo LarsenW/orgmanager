@@ -9,8 +9,13 @@ $(document).ready(function() {
 	$("#addCompany").click(function() {
 		currentState = formState.create;
 		$('h2#createTitle').show();
+		$("#hideForm").show();
 		drawForm();
 	});
+	$("#hideForm").click(function() {
+		resetForm();
+		$("#hideForm").hide()
+	})
 	$("#isSubsidiaryCompany").change(function() {
 		loadCompanies();
 
@@ -89,6 +94,7 @@ function drawTable() {
 										// table.ajax.reload();
 										console.log(data.name)
 										$('h2#editTitle').show();
+										$("#hideForm").show();
 										drawForm();
 										$('input#companyName').val(data.name);
 										$('input#income').val(data.income);
@@ -251,4 +257,5 @@ function resetForm() {
 	$("#companiesSelect").hide();
 	$('h2#createTitle').hide();
 	$('h2#editTitle').hide();
+	$("#hideForm").hide();
 }

@@ -60,8 +60,9 @@
 					</tbody>
 				</table>
 				<br>
-				<div class="well well-sm success" id="successWell" style="display: none;">The
-					company has been successfully added</div>
+				<div class="well well-sm success" id="successWell"
+					style="display: none;">The company has been successfully
+					added</div>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -70,6 +71,12 @@
 			<div class="col-md-4">
 				<button type="button" class="btn btn-primary" id="addCompany">
 					Add company <span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" id="hideForm" style="display: none;">
+					Hide<span class="glyphicon glyphicon-chevron-up"></span>
 				</button>
 			</div>
 		</div>
@@ -85,13 +92,13 @@
 						<label for="companyName">Company name:</label> <input type="text"
 							class="form-control" id="companyName" name="companyName"
 							minlength="2" required="" aria-required="true">
-						<div class="well well-sm" id="nameError" style="display: none;">Invalid or non-unique
-							name</div>
+						<div class="well well-sm" id="nameError" style="display: none;">Invalid
+							or non-unique name</div>
 						<label for="income">Earnings:</label> <input type="number"
 							class="form-control" id="income" minlength="1" required=""
 							aria-required="true">
-						<div class="well well-sm error" id="incomeError" style="display: none;">Invalid
-							income</div>
+						<div class="well well-sm error" id="incomeError"
+							style="display: none;">Invalid income</div>
 						<div>
 							<input type="checkbox" id="isSubsidiaryCompany">
 							Subsidiary company
