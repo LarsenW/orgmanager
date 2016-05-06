@@ -85,7 +85,7 @@ function drawTable() {
 						currentState = formState.update;
 						var data = table.row($(this).parents('tr')).data();
 						console.log(data);
-						currentCompanyId=data.id;
+						currentCompanyId = data.id;
 						$
 								.ajax({
 									type : "GET",
@@ -101,9 +101,9 @@ function drawTable() {
 										if (data.parentId != 0) {
 											$('#isSubsidiaryCompany').prop(
 													'checked', true);
-											$("#companiesSelect").show();
 											loadCompanies();
-											// $("#companiesList").val(1);
+											$("#companiesSelect").show();
+
 										}
 									},
 									error : function(data) {
@@ -151,9 +151,12 @@ function loadCompanies() {
 						text : data.name
 					}));
 				});
+				$("#companiesSelect").show();
+				$('#companiesList').val(currentCompanyId);
 			}
+		
 		})
-		$("#companiesSelect").show();
+
 	} else {
 		$("#companiesSelect").hide();
 	}
