@@ -7,6 +7,7 @@ var currentCompanyId=0;
 $(document).ready(function() {
 	drawTable();
 	$("#addCompany").click(function() {
+		resetForm();
 		currentState = formState.create;
 		$('h2#createTitle').show();
 		$("#hideForm").show();
@@ -93,6 +94,7 @@ function drawTable() {
 									success : function(data) {
 										// table.ajax.reload();
 										console.log(data.name)
+										$('h2#createTitle').hide();
 										$('h2#editTitle').show();
 										$("#hideForm").show();
 										drawForm();
@@ -202,6 +204,7 @@ function createCompany() {
 						table.ajax.reload();
 						$("#successWell").show().delay(3000).fadeOut();
 						resetForm();
+						hideForm();
 					}
 
 				},
@@ -248,6 +251,7 @@ function updateCompany() {
 				table.ajax.reload();
 				$("#successWell").show().delay(3000).fadeOut();
 				resetForm();
+				hideForm();
 			}
 
 		},
@@ -259,7 +263,6 @@ function updateCompany() {
 function resetForm() {
 	$("input#companyName").val('');
 	$("input#income").val('');
-	hideForm();
 	$('#isSubsidiaryCompany').prop('checked', false);
 	$("select#companiesList").prop('selectedIndex', 0);
 	$("#companiesSelect").hide();
