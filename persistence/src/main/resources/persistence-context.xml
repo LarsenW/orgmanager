@@ -24,8 +24,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<bean id="jpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<property name="database" value="MYSQL" />
-		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+		<property name="database" value="POSTGRESQL" />
+		<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 		<property name="showSql" value="true" />
 	</bean>
 
@@ -41,11 +41,11 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/orgmanager" />
-		<property name="username" value="root" />
-		<property name="password" value="1111" />
+			value="jdbc:postgresql://ec2-54-163-226-155.compute-1.amazonaws.com:5432/d9iqc7nbdjlkag?sslmode=require&amp;user=sxgeyteuwepxcj&amp;password=_rdmkfyhRmah_CtMUQvsZAA1Xs" />
+		<property name="username" value="sxgeyteuwepxcj" />
+		<property name="password" value="_rdmkfyhRmah_CtMUQvsZAA1Xs" />
 	</bean>
 
 </beans>
