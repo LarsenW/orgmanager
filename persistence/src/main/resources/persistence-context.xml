@@ -43,9 +43,9 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://ec2-54-163-226-155.compute-1.amazonaws.com:5432/d9iqc7nbdjlkag?sslmode=require&amp;user=sxgeyteuwepxcj&amp;password=_rdmkfyhRmah_CtMUQvsZAA1Xs" />
-		<property name="username" value="sxgeyteuwepxcj" />
-		<property name="password" value="_rdmkfyhRmah_CtMUQvsZAA1Xs" />
+			value="jdbc:postgresql://ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/dfp17k7ctk9udj?sslmode=require&amp;user=pkpatiwmweuqsv&amp;password=3bkHLBiN_Vhow8hOj3jjCl9rxO" />
+		<property name="username" value="pkpatiwmweuqsv" />
+		<property name="password" value="3bkHLBiN_Vhow8hOj3jjCl9rxO" />
 	</bean>
 
 </beans>
