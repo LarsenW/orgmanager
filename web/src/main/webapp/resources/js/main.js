@@ -15,6 +15,7 @@ $(document).ready(function() {
 	});
 	$("#hideForm").click(function() {
 		resetForm();
+		$('#companyForm').hide();
 		$("#hideForm").hide()
 	})
 	$("#isSubsidiaryCompany").change(function() {
@@ -92,7 +93,6 @@ function drawTable() {
 									type : "GET",
 									url : "get_company_" + data.id,
 									success : function(data) {
-										// table.ajax.reload();
 										console.log(data.name)
 										$('h2#createTitle').hide();
 										$('h2#editTitle').show();
