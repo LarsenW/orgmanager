@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.orgmanager.business.service.CompanyDeletingService;
 import com.orgmanager.business.service.CompanyGridService;
 import com.orgmanager.business.service.CompanyService;
+import com.orgmanager.business.service.CompanyTreeService;
 import com.orgmanager.common.dto.CompanyErrorDto;
 import com.orgmanager.common.dto.CompanyGridDto;
+import com.orgmanager.common.dto.CompanyTreeDto;
 import com.orgmanager.common.entity.Company;
 
 @Controller
@@ -28,6 +30,9 @@ public class IndexController {
 
 	@Autowired
 	CompanyGridService companyGridService;
+
+	@Autowired
+	CompanyTreeService companyTreeService;
 
 	@Autowired
 	CompanyDeletingService companyDeletingService;
@@ -94,14 +99,14 @@ public class IndexController {
 		Company company = companyService.getById(id);
 		return company;
 	}
-	
-	@RequestMapping(value="/update_company_{id}",method=RequestMethod.POST)
-	public @ResponseBody CompanyErrorDto updateCompany(HttpServletRequest request,@PathVariable Long id){
+
+	@RequestMapping(value = "/update_company_{id}", method = RequestMethod.POST)
+	public @ResponseBody CompanyErrorDto updateCompany(HttpServletRequest request, @PathVariable Long id) {
 		CompanyErrorDto error = new CompanyErrorDto();
 		Company company = companyService.getById(id);
 		boolean fail = false;
 		String name = request.getParameter("name");
-		boolean unique = (companyService.getByName(name) == null)||name.equals(company.getName()) ? true : false;
+		boolean unique = (companyService.getByName(name) == null) || name.equals(company.getName()) ? true : false;
 		try {
 			Double income = Double.valueOf(request.getParameter("income"));
 			if (income >= 0) {
@@ -141,7 +146,19 @@ public class IndexController {
 		return error;
 
 	}
-	
+
+	@RequestMapping(value = "/get_company_tree_{id}", method = RequestMethod.GET)
+	public @ResponseBody CompanyTreeDto getCompanyTree(@PathVariable Long id) {
+		
+		Company company = companyService.getById(id);
+		if (company.getParentId() != 0) {
+			return companyTreeService.getCompanyTree(companyService.getById(company.getParentId()));
+		} else {
+			return companyTreeService.getCompanyTree(company);
+		}
+
+	}
+
 	@RequestMapping(value = "/delete_{id}", method = RequestMethod.POST)
 	public @ResponseBody void deleteCompany(@PathVariable Long id) {
 		companyDeletingService.deleteCompanyById(id);

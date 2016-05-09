@@ -3,7 +3,7 @@ var formState = {
 	update : 1
 }
 var currentState;
-var currentCompanyId=0;
+var currentCompanyId = 0;
 $(document).ready(function() {
 	drawTable();
 	$("#addCompany").click(function() {
@@ -75,10 +75,56 @@ function drawTable() {
 					}
 
 			)
-	$('#allCompanies tbody').on('click', 'button#tree', function() {
-		var data = table.row($(this).parents('tr')).data();
-		alert('showing tree structure hasn`t implemented yet')
-	});
+	$('#allCompanies tbody')
+			.on(
+					'click',
+					'button#tree',
+					function() {
+						var data = table.row($(this).parents('tr')).data();
+						console.log(data)
+						$
+								.ajax({
+									type : "GET",
+									url : "get_company_tree_" + data.id,
+									success : function(data) {
+										console.log(data)
+										var config = {
+											container : "#treeChart"
+										}
+										chartConfig = [];
+										chartConfig.push(config);
+										addNodes(data, 0);
+										var my_chart = new Treant(chartConfig);
+									},
+									error : function(data) {
+										alert('The service is currently unavailable. Please try again later.');
+									}
+								});
+					});
+	function addNodes(treeDto, parentNode) {
+		var node;
+		if (parentNode == 0) {
+			node = {
+				text : {
+					name : treeDto.company.name
+				}
+			};
+		} else {
+			node = {
+				parent : parentNode,
+				text : {
+					name : treeDto.company.name
+				}
+			}
+		}
+		parentNode = node;
+		chartConfig.push(node)
+		if (treeDto.subsidiaryCompanies.length > 0) {
+			for (i = 0; i < treeDto.subsidiaryCompanies.length; i++) {
+				addNodes(treeDto.subsidiaryCompanies[i], parentNode);
+			}
+		}
+	}
 	$('#allCompanies tbody')
 			.on(
 					'click',
@@ -106,10 +152,11 @@ function drawTable() {
 											loadCompanies();
 											$("#companiesSelect").show();
 
-										}else{
+										} else {
 											$('#isSubsidiaryCompany').prop(
 													'checked', false);
-											$("select#companiesList").prop('selectedIndex', 0);
+											$("select#companiesList").prop(
+													'selectedIndex', 0);
 											$("#companiesSelect").hide();
 										}
 									},
@@ -161,7 +208,7 @@ function loadCompanies() {
 				$("#companiesSelect").show();
 				$('#companiesList').val(currentCompanyId);
 			}
-		
+
 		})
 
 	} else {
@@ -216,49 +263,49 @@ function createCompany() {
 function updateCompany() {
 	console.log('update');
 	$
-	.ajax({
-		type : "POST",
-		url : "update_company_"+currentCompanyId,
-		data : {
-			name : $("input#companyName").val(),
-			income : $("input#income").val(),
-			parentId : $("select#companiesList option:selected").val() == '' ? 0
-					: $("select#companiesList option:selected").val()
-		},
-		success : function(data) {
-			console.log(data)
-			var fail = false;
-			if (data.invalidName) {
-				$("#nameError").show();
-				fail = true;
-			} else {
-				$("#nameError").hide();
-			}
-			if (data.invalidIncome) {
-				$("#incomeError").show();
-				fail = true;
-			} else {
-				$("#incomeError").hide();
-			}
-			if (data.invalidParentId) {
-				$("#parentIdError").show();
-				fail = true;
-			} else {
-				$("#parentIdError").hide();
-			}
-			if (!fail) {
-				currentCompanyId=0;
-				table.ajax.reload();
-				$("#successWell").show().delay(3000).fadeOut();
-				resetForm();
-				hideForm();
-			}
+			.ajax({
+				type : "POST",
+				url : "update_company_" + currentCompanyId,
+				data : {
+					name : $("input#companyName").val(),
+					income : $("input#income").val(),
+					parentId : $("select#companiesList option:selected").val() == '' ? 0
+							: $("select#companiesList option:selected").val()
+				},
+				success : function(data) {
+					console.log(data)
+					var fail = false;
+					if (data.invalidName) {
+						$("#nameError").show();
+						fail = true;
+					} else {
+						$("#nameError").hide();
+					}
+					if (data.invalidIncome) {
+						$("#incomeError").show();
+						fail = true;
+					} else {
+						$("#incomeError").hide();
+					}
+					if (data.invalidParentId) {
+						$("#parentIdError").show();
+						fail = true;
+					} else {
+						$("#parentIdError").hide();
+					}
+					if (!fail) {
+						currentCompanyId = 0;
+						table.ajax.reload();
+						$("#successWell").show().delay(3000).fadeOut();
+						resetForm();
+						hideForm();
+					}
 
-		},
-		error : function(data) {
-			alert('The service is currently unavailable. Please try again later.');
-		}
-	});
+				},
+				error : function(data) {
+					alert('The service is currently unavailable. Please try again later.');
+				}
+			});
 }
 function resetForm() {
 	$("input#companyName").val('');

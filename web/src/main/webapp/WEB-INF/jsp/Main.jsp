@@ -13,12 +13,16 @@
 	href="${basedir}/resources/css/lib/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${basedir}/resources/css/lib/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="${basedir}/resources/css/lib/Treant.css"
+	type="text/css" />
 <script src="${basedir}/resources/js/lib/jquery-1.12.3.min.js"></script>
 <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/resources/js/lib/dataTables.bootstrap.min.js"></script>
 <script src="${basedir}/resources/js/lib/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${basedir}/resources/css/main.css">
 <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
+<script src="${basedir}/resources/js/lib/raphael.js"></script>
+<script src="${basedir}/resources/js/lib/Treant.js"></script>
 <script src="${basedir}/resources/js/main.js"></script>
 <title>Insert title here</title>
 </head>
@@ -75,7 +79,8 @@
 			</div>
 			<div class="col-md-3"></div>
 			<div class="col-md-2">
-				<button type="button" class="btn btn-default" id="hideForm" style="display: none;">
+				<button type="button" class="btn btn-default" id="hideForm"
+					style="display: none;">
 					Hide<span class="glyphicon glyphicon-chevron-up"></span>
 				</button>
 			</div>
@@ -119,6 +124,21 @@
 						</div>
 					</form>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-block btn-default"
+						id="hideTree">
+						Hide<span class="glyphicon glyphicon-chevron-up"></span>
+					</button>
+				</div>
+			</div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<div id="treeChart" style="width: 335px; height: 160px"></div>
 			</div>
 		</div>
 	</div>
